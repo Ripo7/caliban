@@ -5,11 +5,13 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import {
+  ATMOSPHERE_SCENE_RADIUS,
   MIN_SELECTED_VIEW_DISTANCE,
   READABLE_OVERVIEW_DISTANCE,
 } from "@/lib/scale";
 
 const ORIGIN = new THREE.Vector3(0, 0, 0);
+const MIN_CAMERA_DISTANCE_FROM_EARTH = ATMOSPHERE_SCENE_RADIUS * 1.6;
 
 export interface CameraRigProps {
   controlsRef: React.RefObject<OrbitControlsImpl | null>;
@@ -70,6 +72,13 @@ export default function CameraRig({
     const desiredPosition = controls.target
       .clone()
       .add(direction.multiplyScalar(currentDistance.current));
+
+    // Never let the dolly-to-selection push the camera through Earth's
+    // atmosphere shell, which can happen when a selected rock's own
+    // distance from Earth is smaller than the desired viewing distance.
+    if (desiredPosition.length() < MIN_CAMERA_DISTANCE_FROM_EARTH) {
+      desiredPosition.setLength(MIN_CAMERA_DISTANCE_FROM_EARTH);
+    }
 
     camera.position.lerp(desiredPosition, alpha);
     controls.update();

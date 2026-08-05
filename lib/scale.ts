@@ -15,7 +15,7 @@ export const READABLE_MIN_DIST = 2.4;
 export const READABLE_MAX_DIST = 32;
 
 export const READABLE_OVERVIEW_DISTANCE = 44;
-export const MIN_SELECTED_VIEW_DISTANCE = 2.4;
+export const MIN_SELECTED_VIEW_DISTANCE = 0.9;
 
 export const READABLE_MIN_DIAM_M = 1;
 export const READABLE_MAX_DIAM_M = 2000;

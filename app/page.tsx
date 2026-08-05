@@ -134,7 +134,10 @@ export default function Home() {
         hazardousCount={data.hazardousCount}
         isArchived={data.isArchived}
         scaleMode={scaleMode}
-        onToggleScale={() => setScaleMode(scaleMode === "readable" ? "true" : "readable")}
+        onToggleScale={() => {
+          setSelectedId(null);
+          setScaleMode(scaleMode === "readable" ? "true" : "readable");
+        }}
       />
 
       <div className="flex min-h-0 flex-1 flex-col md:flex-row">
