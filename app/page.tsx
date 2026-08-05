@@ -89,6 +89,15 @@ export default function Home() {
     return () => clearTimeout(timeout);
   }, [scaleMode, reducedMotion]);
 
+  useEffect(() => {
+    if (!selectedId) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedId(null);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [selectedId]);
+
   if (error) {
     return (
       <main className="flex h-screen items-center justify-center bg-field px-6 text-center">
@@ -159,16 +168,28 @@ export default function Home() {
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col md:w-[380px] md:flex-none">
-          <div className={selected ? "hidden md:flex md:min-h-0 md:flex-1 md:flex-col" : "flex min-h-0 flex-1 flex-col"}>
+          <div className="flex min-h-0 flex-1 flex-col">
             <Manifest asteroids={data.asteroids} selectedId={selectedId} onSelect={setSelectedId} />
           </div>
 
           {selected && (
-            <div className="flex min-h-0 flex-1 flex-col border-t border-rule md:flex-[1.3]">
+            <div className="hidden min-h-0 flex-[1.3] flex-col border-t border-rule md:flex">
               <Dossier asteroid={selected} onClose={() => setSelectedId(null)} />
             </div>
           )}
         </div>
+      </div>
+
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!selected}
+        aria-label={selected ? `Dossier: ${selected.name}` : undefined}
+        className={`fixed inset-x-0 bottom-0 z-30 max-h-[75vh] overflow-y-auto border-t border-rule bg-field md:hidden ${
+          reducedMotion ? "" : "transition-transform duration-300 ease-out"
+        } ${selected ? "translate-y-0" : "pointer-events-none translate-y-full"}`}
+      >
+        {selected && <Dossier asteroid={selected} onClose={() => setSelectedId(null)} />}
       </div>
     </main>
   );
