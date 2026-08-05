@@ -6,8 +6,12 @@ import type { NeosResponse } from "@/lib/types";
 import Header from "@/components/Header";
 import Manifest from "@/components/Manifest";
 import Dossier from "@/components/Dossier";
+import TrueScalePayoff from "@/components/TrueScalePayoff";
 
 const Scene = dynamic(() => import("@/components/scene/Scene"), { ssr: false });
+
+const SCALE_TRANSITION_MS = 2200;
+const EMPTY_FRAME_HOLD_MS = 900;
 
 function useReducedMotion(): boolean {
   const [reduced, setReduced] = useState(false);
@@ -28,6 +32,7 @@ export default function Home() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [scaleMode, setScaleMode] = useState<"readable" | "true">("readable");
   const [scaleT, setScaleT] = useState(0);
+  const [payoffVisible, setPayoffVisible] = useState(false);
   const reducedMotion = useReducedMotion();
   const animFrame = useRef<number | null>(null);
 
@@ -44,7 +49,7 @@ export default function Home() {
       setScaleT(target);
       return;
     }
-    const duration = 2200;
+    const duration = SCALE_TRANSITION_MS;
     const start = performance.now();
     const startValue = scaleT;
     const ease = (x: number) => 1 - Math.pow(1 - x, 3);
@@ -63,6 +68,22 @@ export default function Home() {
       if (animFrame.current) cancelAnimationFrame(animFrame.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scaleMode, reducedMotion]);
+
+  useEffect(() => {
+    if (scaleMode !== "true") {
+      setPayoffVisible(false);
+      return;
+    }
+    if (reducedMotion) {
+      setPayoffVisible(true);
+      return;
+    }
+    const timeout = setTimeout(
+      () => setPayoffVisible(true),
+      SCALE_TRANSITION_MS + EMPTY_FRAME_HOLD_MS,
+    );
+    return () => clearTimeout(timeout);
   }, [scaleMode, reducedMotion]);
 
   if (error) {
@@ -115,10 +136,18 @@ export default function Home() {
             {scaleMode === "readable" ? "Readable scale" : "True scale"}
           </div>
 
-          {hovered && hovered.id !== selectedId && (
+          {hovered && hovered.id !== selectedId && !payoffVisible && (
             <div className="pointer-events-none absolute bottom-3 left-3 border border-rule bg-field/90 px-2.5 py-1.5 font-mono text-xs text-bone">
               {hovered.name} — {hovered.missDistanceLunar.toFixed(2)} LD
             </div>
+          )}
+
+          {scaleMode === "true" && (
+            <TrueScalePayoff
+              visible={payoffVisible}
+              reducedMotion={reducedMotion}
+              onReturn={() => setScaleMode("readable")}
+            />
           )}
         </div>
 
