@@ -39,7 +39,7 @@ export default function Header({
         forecast.
         {isArchived && (
           <span className="ml-2 border border-rule px-1.5 py-0.5 font-mono text-[11px] uppercase text-instrument">
-            showing archived data
+            live feed unavailable — showing last archived capture
           </span>
         )}
       </p>

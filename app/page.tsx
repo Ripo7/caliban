@@ -40,7 +40,10 @@ export default function Home() {
     fetch("/api/neos")
       .then((res) => res.json())
       .then(setData)
-      .catch((err) => setError(String(err)));
+      .catch((err) => {
+        console.error(err);
+        setError("Neither the live feed nor the archive responded.");
+      });
   }, []);
 
   useEffect(() => {
@@ -89,10 +92,14 @@ export default function Home() {
   if (error) {
     return (
       <main className="flex h-screen items-center justify-center bg-field px-6 text-center">
-        <p className="max-w-md font-mono text-sm text-bone-dim">
-          The feed did not respond and the archive did not load either. There is
-          nothing to file. ({error})
-        </p>
+        <div className="max-w-sm">
+          <p className="font-mono text-sm uppercase tracking-wide text-hazard">
+            {error}
+          </p>
+          <p className="mt-2 font-mono text-xs text-bone-dim">
+            There is nothing to file. Reload to try again.
+          </p>
+        </div>
       </main>
     );
   }

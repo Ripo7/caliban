@@ -14,6 +14,11 @@ export default function Manifest({ asteroids, selectedId, onSelect }: ManifestPr
           Manifest &mdash; {asteroids.length} object{asteroids.length === 1 ? "" : "s"}
         </h2>
       </div>
+      {asteroids.length === 0 ? (
+        <p className="px-4 py-6 font-mono text-xs text-bone-dim">
+          No objects tracked for this date. Filed as unremarkable.
+        </p>
+      ) : (
       <ul className="flex-1 overflow-y-auto">
         {asteroids.map((a) => {
           const isSelected = a.id === selectedId;
@@ -50,6 +55,7 @@ export default function Manifest({ asteroids, selectedId, onSelect }: ManifestPr
           );
         })}
       </ul>
+      )}
     </div>
   );
 }
