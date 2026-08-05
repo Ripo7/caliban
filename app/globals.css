@@ -1,1 +1,51 @@
 @import "tailwindcss";
+
+@theme {
+  --color-field: #12161a;
+  --color-field-raised: #171c21;
+  --color-bone: #e6e1d6;
+  --color-bone-dim: #a8a296;
+  --color-hazard: #c8873b;
+  --color-instrument: #6e9a93;
+  --color-rule: #2a3138;
+
+  --font-display: "Antonio", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-field);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--color-instrument);
+    color: var(--color-field);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-instrument);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .tracking-tightish {
+    letter-spacing: 0.01em;
+  }
+}

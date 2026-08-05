@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import type { NeosResponse } from "@/lib/types";
+import Header from "@/components/Header";
+import Manifest from "@/components/Manifest";
+import Dossier from "@/components/Dossier";
 
 const Scene = dynamic(() => import("@/components/scene/Scene"), { ssr: false });
 
@@ -62,29 +65,43 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scaleMode, reducedMotion]);
 
-  if (error) return <p>Error: {error}</p>;
-  if (!data) return <p>Loading...</p>;
+  if (error) {
+    return (
+      <main className="flex h-screen items-center justify-center bg-field px-6 text-center">
+        <p className="max-w-md font-mono text-sm text-bone-dim">
+          The feed did not respond and the archive did not load either. There is
+          nothing to file. ({error})
+        </p>
+      </main>
+    );
+  }
+
+  if (!data) {
+    return (
+      <main className="flex h-screen items-center justify-center bg-field">
+        <p className="font-mono text-sm uppercase tracking-widest text-instrument">
+          Requesting orbital data&hellip;
+        </p>
+      </main>
+    );
+  }
 
   const hovered = data.asteroids.find((a) => a.id === hoveredId) ?? null;
   const selected = data.asteroids.find((a) => a.id === selectedId) ?? null;
 
   return (
-    <main style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      <header>
-        <h1>Asteroid Roulette</h1>
-        <p>
-          {data.date} — {data.elementCount} objects — {data.hazardousCount} flagged
-          potentially hazardous (a technical orbital classification, not a forecast).
-          {data.isArchived ? " Showing archived data." : ""}
-        </p>
-        <button onClick={() => setScaleMode(scaleMode === "readable" ? "true" : "readable")}>
-          {scaleMode === "readable" ? "TRUE SCALE" : "READABLE SCALE"}
-        </button>
-        <span>{scaleMode === "readable" ? "READABLE SCALE" : "TRUE SCALE"}</span>
-      </header>
+    <main className="flex h-screen flex-col bg-field text-bone">
+      <Header
+        date={data.date}
+        elementCount={data.elementCount}
+        hazardousCount={data.hazardousCount}
+        isArchived={data.isArchived}
+        scaleMode={scaleMode}
+        onToggleScale={() => setScaleMode(scaleMode === "readable" ? "true" : "readable")}
+      />
 
-      <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
-        <div style={{ flex: 1, position: "relative" }}>
+      <div className="flex min-h-0 flex-1 flex-col md:flex-row">
+        <div className="relative h-[46vh] shrink-0 border-b border-rule md:h-auto md:flex-[1.6] md:border-b-0 md:border-r">
           <Scene
             asteroids={data.asteroids}
             selectedId={selectedId}
@@ -93,45 +110,26 @@ export default function Home() {
             scaleT={scaleT}
             reducedMotion={reducedMotion}
           />
-          {hovered && !selected && (
-            <div style={{ position: "absolute", top: 8, left: 8 }}>
+
+          <div className="pointer-events-none absolute left-3 top-3 font-mono text-[11px] uppercase tracking-widest text-instrument">
+            {scaleMode === "readable" ? "Readable scale" : "True scale"}
+          </div>
+
+          {hovered && hovered.id !== selectedId && (
+            <div className="pointer-events-none absolute bottom-3 left-3 border border-rule bg-field/90 px-2.5 py-1.5 font-mono text-xs text-bone">
               {hovered.name} — {hovered.missDistanceLunar.toFixed(2)} LD
             </div>
           )}
         </div>
 
-        <div style={{ width: 320, overflowY: "auto" }}>
-          <ul>
-            {data.asteroids.map((a) => (
-              <li key={a.id}>
-                <button
-                  onClick={() => setSelectedId(a.id === selectedId ? null : a.id)}
-                  aria-pressed={a.id === selectedId}
-                  style={{ fontWeight: a.id === selectedId ? "bold" : "normal" }}
-                >
-                  {a.name} — {((a.diameterMinMeters + a.diameterMaxMeters) / 2).toFixed(0)}
-                  m — {a.missDistanceLunar.toFixed(2)} LD
-                </button>
-              </li>
-            ))}
-          </ul>
+        <div className="flex min-h-0 flex-1 flex-col md:w-[380px] md:flex-none">
+          <div className={selected ? "hidden md:flex md:min-h-0 md:flex-1 md:flex-col" : "flex min-h-0 flex-1 flex-col"}>
+            <Manifest asteroids={data.asteroids} selectedId={selectedId} onSelect={setSelectedId} />
+          </div>
 
           {selected && (
-            <div>
-              <h2>{selected.name}</h2>
-              <p>
-                Diameter: {selected.diameterMinMeters.toFixed(1)}–
-                {selected.diameterMaxMeters.toFixed(1)} m
-              </p>
-              <p>
-                Miss distance: {selected.missDistanceLunar.toFixed(3)} LD (
-                {selected.missDistanceKm.toLocaleString()} km)
-              </p>
-              <p>Velocity: {selected.velocityKmPerSecond.toFixed(2)} km/s</p>
-              <p>Close approach: {selected.closeApproachDateFull}</p>
-              <a href={selected.nasaJplUrl} target="_blank" rel="noreferrer">
-                the actual scientists
-              </a>
+            <div className="flex min-h-0 flex-1 flex-col border-t border-rule md:flex-[1.3]">
+              <Dossier asteroid={selected} onClose={() => setSelectedId(null)} />
             </div>
           )}
         </div>
