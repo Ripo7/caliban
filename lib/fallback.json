@@ -1,0 +1,241 @@
+{
+  "element_count": 9,
+  "near_earth_objects": {
+    "2026-08-05": [
+      {
+        "id": "2024001",
+        "name": "(2024 PT5)",
+        "nasa_jpl_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5",
+        "estimated_diameter": {
+          "meters": {
+            "estimated_diameter_min": 5.8,
+            "estimated_diameter_max": 13.1
+          }
+        },
+        "is_potentially_hazardous_asteroid": false,
+        "is_sentry_object": false,
+        "close_approach_data": [
+          {
+            "close_approach_date_full": "2026-Aug-05 03:12",
+            "relative_velocity": {
+              "kilometers_per_second": "3.42"
+            },
+            "miss_distance": {
+              "lunar": "0.62",
+              "kilometers": "238400"
+            },
+            "orbiting_body": "Earth"
+          }
+        ]
+      },
+      {
+        "id": "3542519",
+        "name": "(2010 XC15)",
+        "nasa_jpl_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2010%20XC15",
+        "estimated_diameter": {
+          "meters": {
+            "estimated_diameter_min": 34.9,
+            "estimated_diameter_max": 78.1
+          }
+        },
+        "is_potentially_hazardous_asteroid": true,
+        "is_sentry_object": false,
+        "close_approach_data": [
+          {
+            "close_approach_date_full": "2026-Aug-05 09:47",
+            "relative_velocity": {
+              "kilometers_per_second": "11.87"
+            },
+            "miss_distance": {
+              "lunar": "1.94",
+              "kilometers": "745000"
+            },
+            "orbiting_body": "Earth"
+          }
+        ]
+      },
+      {
+        "id": "54016849",
+        "name": "(2020 QG)",
+        "nasa_jpl_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2020%20QG",
+        "estimated_diameter": {
+          "meters": {
+            "estimated_diameter_min": 3.1,
+            "estimated_diameter_max": 6.9
+          }
+        },
+        "is_potentially_hazardous_asteroid": false,
+        "is_sentry_object": false,
+        "close_approach_data": [
+          {
+            "close_approach_date_full": "2026-Aug-05 14:03",
+            "relative_velocity": {
+              "kilometers_per_second": "7.75"
+            },
+            "miss_distance": {
+              "lunar": "0.081",
+              "kilometers": "31200"
+            },
+            "orbiting_body": "Earth"
+          }
+        ]
+      },
+      {
+        "id": "2465633",
+        "name": "(2007 FT3)",
+        "nasa_jpl_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2007%20FT3",
+        "estimated_diameter": {
+          "meters": {
+            "estimated_diameter_min": 310.4,
+            "estimated_diameter_max": 694.2
+          }
+        },
+        "is_potentially_hazardous_asteroid": true,
+        "is_sentry_object": true,
+        "close_approach_data": [
+          {
+            "close_approach_date_full": "2026-Aug-05 18:29",
+            "relative_velocity": {
+              "kilometers_per_second": "19.34"
+            },
+            "miss_distance": {
+              "lunar": "23.68",
+              "kilometers": "9105000"
+            },
+            "orbiting_body": "Earth"
+          }
+        ]
+      },
+      {
+        "id": "3781535",
+        "name": "(2016 WF9)",
+        "nasa_jpl_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2016%20WF9",
+        "estimated_diameter": {
+          "meters": {
+            "estimated_diameter_min": 88.6,
+            "estimated_diameter_max": 198.2
+          }
+        },
+        "is_potentially_hazardous_asteroid": false,
+        "is_sentry_object": false,
+        "close_approach_data": [
+          {
+            "close_approach_date_full": "2026-Aug-05 21:55",
+            "relative_velocity": {
+              "kilometers_per_second": "14.21"
+            },
+            "miss_distance": {
+              "lunar": "6.73",
+              "kilometers": "2586000"
+            },
+            "orbiting_body": "Earth"
+          }
+        ]
+      },
+      {
+        "id": "2099942",
+        "name": "(1999 AN10)",
+        "nasa_jpl_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1999%20AN10",
+        "estimated_diameter": {
+          "meters": {
+            "estimated_diameter_min": 620.5,
+            "estimated_diameter_max": 1387.9
+          }
+        },
+        "is_potentially_hazardous_asteroid": true,
+        "is_sentry_object": false,
+        "close_approach_data": [
+          {
+            "close_approach_date_full": "2026-Aug-06 02:14",
+            "relative_velocity": {
+              "kilometers_per_second": "24.88"
+            },
+            "miss_distance": {
+              "lunar": "41.32",
+              "kilometers": "15884000"
+            },
+            "orbiting_body": "Earth"
+          }
+        ]
+      },
+      {
+        "id": "3671267",
+        "name": "(2013 UG1)",
+        "nasa_jpl_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2013%20UG1",
+        "estimated_diameter": {
+          "meters": {
+            "estimated_diameter_min": 16.3,
+            "estimated_diameter_max": 36.5
+          }
+        },
+        "is_potentially_hazardous_asteroid": false,
+        "is_sentry_object": false,
+        "close_approach_data": [
+          {
+            "close_approach_date_full": "2026-Aug-05 06:38",
+            "relative_velocity": {
+              "kilometers_per_second": "9.02"
+            },
+            "miss_distance": {
+              "lunar": "3.15",
+              "kilometers": "1211000"
+            },
+            "orbiting_body": "Earth"
+          }
+        ]
+      },
+      {
+        "id": "2455432",
+        "name": "(2003 YT1)",
+        "nasa_jpl_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2003%20YT1",
+        "estimated_diameter": {
+          "meters": {
+            "estimated_diameter_min": 132.0,
+            "estimated_diameter_max": 295.2
+          }
+        },
+        "is_potentially_hazardous_asteroid": false,
+        "is_sentry_object": false,
+        "close_approach_data": [
+          {
+            "close_approach_date_full": "2026-Aug-05 11:20",
+            "relative_velocity": {
+              "kilometers_per_second": "16.55"
+            },
+            "miss_distance": {
+              "lunar": "12.47",
+              "kilometers": "4793000"
+            },
+            "orbiting_body": "Earth"
+          }
+        ]
+      },
+      {
+        "id": "3212890",
+        "name": "(2011 CG2)",
+        "nasa_jpl_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2011%20CG2",
+        "estimated_diameter": {
+          "meters": {
+            "estimated_diameter_min": 2.0,
+            "estimated_diameter_max": 4.5
+          }
+        },
+        "is_potentially_hazardous_asteroid": false,
+        "is_sentry_object": false,
+        "close_approach_data": [
+          {
+            "close_approach_date_full": "2026-Aug-05 16:41",
+            "relative_velocity": {
+              "kilometers_per_second": "5.61"
+            },
+            "miss_distance": {
+              "lunar": "0.29",
+              "kilometers": "111500"
+            },
+            "orbiting_body": "Earth"
+          }
+        ]
+      }
+    ]
+  }
+}
